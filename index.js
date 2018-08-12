@@ -42,7 +42,7 @@ client.on("message", message => {
 client.on('message', message =>{
 	if(message.content == '<@473905351784267777>'){
 	  const ayy = client.emojis.find("name", "Kally");
-	  message.channel.send(`:smile: | Olá ${message.author}, eu sou o Trix, meu prefix é \`t!\``)
+	  message.channel.send(`Olá ${message.author}, eu sou o <@478035553934245892> eu sou o BOT oficial da rede AtlanticMC, para saber meus comandos use \`!ajuda\``)
   	}
 	if(message.content == '<@473905351784267777> loritta'){
 	  message.reply(`...`)
@@ -58,16 +58,16 @@ client.on('message', message =>{
 	  message.reply(`eu sei :3! :relaxed: `)
 	  message.react("❤")
   }
-  if(message.content == 'qual ip?'){
+  if(message.content == 'rereredsdssd'){
 	  message.reply(`mc.motocrack.net `)
   }
-  if(message.content == 'nt'){
+  if(message.content == '3232sasda'){
 	  message.reply(`é gay! `)
   }
-  if(message.content == 'pao moderador?'){
+  if(message.content == '32dsdf'){
 	  message.reply(`apoio! `)
   }
-if(message.content == 'motocrack'){
+if(message.content == 'atlanticerwedsdd'){
   message.reply(`Site: http://www.motocrack.net/ \nIP: mc.motocrack.net`)
 }
   if(message.content == '<@407365291870257153> Paosz'){
@@ -88,14 +88,14 @@ client.on("message", message =>{
       
       "Porra", 
       "Caralho",
-      "Merda", 
+      "discord.gg", 
       "Rola",
       "porra", 
       "caralho",
       "merda", 
       "zenix", 
-      ".com", 
-      "jogar.", 
+      ".comerwe", 
+      ".eeewdassa", 
       ".com.br", 
       "Bucetao",
       "bucetao",
@@ -108,11 +108,11 @@ client.on("message", message =>{
       "filha da puta",
       'cuzao',
       "lothus",
-      "rola",
+      "discord.me",
       "buceta",
-      "twitter.com",
+      "twerdfs",
       "instagram.com",
-      "youtube.com"
+      "eerweddee"
   ];
               
   for (var i = 0; i < forbidenWords.length; i++) {
