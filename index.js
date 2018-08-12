@@ -138,16 +138,13 @@ client.on("guildCreate", guild => {
 			.setColor("00e7ff")
 			.setFooter(`Agora estou em ${client.guilds.size} servidores!`)
 		
-		client.channels.get("475002185613049859").send(entrei);
-		const channel = client.channels.get("474982952082735125");
+		client.channels.get("461949266307317770").send(entrei);
+		const channel = client.channels.get("478048544939311104");
 		channel.setName(`📟 | Servidores: ${client.guilds.size}`)
 		const adms = guild.members.filter(r => r.hasPermission('MANAGE_GUILD')).map(pessoa => `${pessoa.id}`)
     		for(var c in adms){
         		const adm = guild.members.get(adms[c]);
-        		adm.send(`Olá ${adm}, tudo bem? eu sou o Trix, um bot para a moderação de servidores do discord!\n
- \`${guild.name}\`, mas agora estou nesse servidor.\n
-Meu prefix é \`t!\` e para saber meus comandos digite \`t!ajuda\`\n
- __Meu__ servidor de suporte: https://discord.gg/cxpmqgP`).catch(O_o=>{});
+        		adm.send(`Olá ${adm}, tudo bem? eu sou o Atlantic`).catch(O_o=>{});
     		}
 	}
 });
@@ -162,8 +159,8 @@ client.on("guildDelete", guild => {
      .setFooter(`Agora estou em ${client.guilds.size} servidores!`)
 
 
-  client.channels.get("475002185613049859").send(entrei);
-  const channel = client.channels.get("474982952082735125");
+  client.channels.get("461949266307317770").send(entrei);
+  const channel = client.channels.get("478048544939311104");
   channel.setName(`📟 | Servidores: ${client.guilds.size}`)
 });
 
