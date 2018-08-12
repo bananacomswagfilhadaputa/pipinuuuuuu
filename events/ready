@@ -1,0 +1,6 @@
+exports.run = (client) => {
+  const config = require('./config.json');
+  client.user.setGame(config.prefix + "ajuda | Criado por Paosz#5829")
+  console.log(`Em funcionamento, estou em ${client.guilds.size} servers`);
+  console.log(`Meu prefix: t!`);
+}
