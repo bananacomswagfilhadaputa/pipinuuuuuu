@@ -1,0 +1,1 @@
+suny-js: node "app.js"
