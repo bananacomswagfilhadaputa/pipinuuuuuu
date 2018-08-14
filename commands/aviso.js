@@ -1,30 +1,55 @@
 const Discord = require("discord.js");
-const bot = new Discord.Client({disableEveryone: false});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) =>{
 
-  if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply(message.author.toString() + " apenas administradores podem executar esse comando.");
-    const Aviso = args.join(" ");
-
-    let semnada = new Discord.RichEmbed()
-    .setColor("4a2aed")
-    .setAuthor(bot.user.username, bot.user.avatarURL)
-    .addField("!aviso", "Manda um aviso mencionando todos os jogadores no canal que o usuário enviou a mensagem.")
-
-    if(!Aviso)
-    return message.author.send(semnada)
-    message.delete().catch();
-    message.channel.send("@everyone"); // Mencionar todos os jogadores
-    let aviso = new Discord.RichEmbed()
-    .setColor("edac2a")
-    .setAuthor("⚠️ Anúncio ", "mc-atlantic.tk", "https://cdn.discordapp.com/attachments/409846357982183434/429837842697682955/emoji.png")
-    .setDescription(Aviso)
+   message.delete().catch(O_o=>{});
+   if (!message.member.hasPermission('MANAGE_GUILD'))
+      return message.reply("você não tem permissão!").then(msg => msg.delete(10000));
+   let atlantic = message.guild.roles.find("name", "AtlanticMC - BOT");
+   const comousar = new Discord.RichEmbed()
+      .setAuthor("AtlanticMC - Bot", client.user.avatarURL)
+      .setColor("#4a2aed")
+      .setFooter("Atlantic")
+      .addField("Como usar:", "`!anuncio <mensagem>`")
       
-    .setTimestamp()
-    .setFooter(`Por: ${message.author.tag} - {bot.user.username} | Anúncio`, message.author.avatarURL)
-    return message.channel.send(aviso);
-  }
-  
-module.exports.help = {
-    name: "aviso"
-  }
+   let mensg = args.join(" ");
+   if(!mensg)
+      return message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
+   if(!message.guild.roles.find("name", "AtlanticMC - BOT")) {
+        const anuncio = new Discord.RichEmbed()
+            .setColor('#4a2aed')
+            .setTitle(`⚠️ Atlantic - Anúncio `)
+            
+            .setDescription(mensg)
+            
+            .setTimestamp()
+            .setFooter(`Por: ${message.author.tag} - Anúncio`, message.author.avatarURL)
+
+        message.channel.send("@everyone", anuncio)
+        return;
+    }
+    if(kallyrole.color == "0"){
+            const anuncio = new Discord.RichEmbed()
+                .setColor('#4a2aed')
+                .setTitle(`⚠️ Atlantic - Anúncio`)
+                
+                .setDescription(mensg)
+                
+                .setTimestamp()
+                .setFooter(`Por: ${message.author.tag} - Anúncio `, message.author.avatarURL)
+
+            message.channel.send("@everyone", anuncio)
+        }else{
+            const anuncio = new Discord.RichEmbed()
+                .setColor(atlantic.color)
+                .setTitle(`#4a2aed`)
+                
+                .setDescription(mensg)
+                
+                .setTimestamp()
+                .setFooter(`Por: ${message.author.tag} - Anúncio`, message.author.avatarURL)
+
+            message.channel.send("@everyone", anuncio)
+            return;
+        }   
+}
