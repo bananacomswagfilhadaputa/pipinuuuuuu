@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     .setDescription(Aviso)
       
     .setTimestamp()
-    .setFooter(`Por: ${message.author.tag} | Anúncio`, message.author.avatarURL)
+    .setFooter(`Por: ${message.author.tag} - {bot.user.username} | Anúncio`, message.author.avatarURL)
     return message.channel.send(aviso);
   }
   
