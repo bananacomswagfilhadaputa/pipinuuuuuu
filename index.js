@@ -124,46 +124,6 @@ client.on("message", message =>{
 }
 });
 
-client.on("guildCreate", guild => {
-	if(guild.id === "1" || guild.id === "2"){
-		//BANIR SERVIDORES DE USAR O TRIX
-		guild.owner.send(`O seu servidor (**${guild.name}**) foi banido do Kally e não vai poder usar o bot Kally! **Para saber o motivo do banimento entre em https://discord.gg/fsSNJJH**`)
-		guild.leave()
-	}else{
-		const entrei = new Discord.RichEmbed()
-			.setAuthor(`${guild.name} | Eu fui adicionado :D`)
-			.setDescription(`Entrei no servidor **${guild.name}** (id: ${guild.id})`)
-			.addField(":busts_in_silhouette: Membros", `Com **${guild.memberCount - guild.members.filter(m=>m.user.bot).size}** membro(s) e **${guild.members.filter(m=>m.user.bot).size}** bot(s)`)
-			.addField(":crown: Dono", `**${guild.owner.user.tag}** (ID: ${guild.owner.id})`)
-			.setColor("00e7ff")
-			.setFooter(`Agora estou em ${client.guilds.size} servidores!`)
-		
-		client.channels.get("461949266307317770").send(entrei);
-		const channel = client.channels.get("478048544939311104");
-		channel.setName(`📟 | Servidores: ${client.guilds.size}`)
-		const adms = guild.members.filter(r => r.hasPermission('MANAGE_GUILD')).map(pessoa => `${pessoa.id}`)
-    		for(var c in adms){
-        		const adm = guild.members.get(adms[c]);
-        		adm.send(`Olá ${adm}, tudo bem? eu sou o Atlantic`).catch(O_o=>{});
-    		}
-	}
-});
-
-client.on("guildDelete", guild => {
-  const entrei = new Discord.RichEmbed()
-     .setAuthor(`${guild.name} | Fui removido :c`)
-     .setDescription(`Fui removido do servidor **${guild.name}** (ID: ${guild.id})!`)
-     .addField(":busts_in_silhouette: Membros", `Com **${guild.memberCount - guild.members.filter(m=>m.user.bot).size}** membro(s) e **${guild.members.filter(m=>m.user.bot).size}** bot(s)`)
-     .addField(":crown: Dono", `${guild.owner.user.tag} (ID: ${guild.owner.id})`)
-     .setColor("ff0000")
-     .setFooter(`Agora estou em ${client.guilds.size} servidores!`)
-
-
-  client.channels.get("461949266307317770").send(entrei);
-  const channel = client.channels.get("478048544939311104");
-  channel.setName(`📟 | Servidores: ${client.guilds.size}`)
-});
-
 client.on('guildMemberAdd', member => {
   let avatar = member.user.avatarURL
 
