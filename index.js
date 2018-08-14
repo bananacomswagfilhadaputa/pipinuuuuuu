@@ -164,6 +164,18 @@ client.on("guildDelete", guild => {
   channel.setName(`📟 | Servidores: ${client.guilds.size}`)
 });
 
+client.on('guildMemberAdd', member => {
+  let avatar = member.user.avatarURL
+
+  let role = member.guild.roles.find('name', 'Membro');
+
+  let embed = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(avatar)
+      .addField('Bem vindo jogador.', `Seja bem vindo ``${member}`` ao Discord do Atlantic!\n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n`)
+      .setFooter(`Pao - Suporte`);
+      client.channels.get('461946622675255296').send(embed);
+      member.addRole(role)
 
 
 
