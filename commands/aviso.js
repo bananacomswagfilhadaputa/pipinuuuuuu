@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
     message.channel.send("@here"); // Mencionar todos os jogadores
     let aviso = new Discord.RichEmbed()
     .setColor("edac2a")
-    .setAuthor("Aviso", "RightMC")
+    .setAuthor("AtlanticMC", "Avisos")
     .setDescription(Aviso)
     
       
