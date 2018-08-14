@@ -15,9 +15,9 @@ exports.run = (client, message, args) => {
             "text": message.author.username
         },
         "image": {
-            "url": `https://www.minecraftskinstealer.com/achievement/a.php?i=38&h=${encodeURIComponent("MotoCrack")}&t=${encodeURIComponent(texto)}`
+            "url": `https://www.minecraftskinstealer.com/achievement/a.php?i=38&h=${encodeURIComponent("Atlantic")}&t=${encodeURIComponent(texto)}`
         },
     }
 })
 
-};
+v
