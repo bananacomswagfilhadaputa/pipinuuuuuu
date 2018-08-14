@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) =>{
    let kallyrole = message.guild.roles.find("name", "Kally");
    const comousar = new Discord.RichEmbed()
       .setAuthor("Atlantic", client.user.avatarURL)
-      .setColor("#cc22a7")
+      .setColor("#4a2aed")
       .setFooter("© Atlantic")
       .addField("Como usar:", "`!anuncio <mensagem>`")
       
@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args) =>{
       return message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
    if(!message.guild.roles.find("name", "Kally")) {
         const anuncio = new Discord.RichEmbed()
-            .setColor('#cc22a7')
+            .setColor('#4a2aed')
             .setTitle(`⚠️ Atlantic - Anúncio`)
             
             .setDescription(mensg)
@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args) =>{
     }
     if(kallyrole.color == "0"){
             const anuncio = new Discord.RichEmbed()
-                .setColor('#cc22a7')
+                .setColor('#4a2aed')
                 .setTitle(`⚠️ Atlantic - Anúncio`)
                 
                 .setDescription(mensg)
