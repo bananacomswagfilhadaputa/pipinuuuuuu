@@ -177,7 +177,7 @@ client.on('guildMemberAdd', member => {
       client.channels.get('461946622675255296').send(embed);
       member.addRole(role)
 
-
+})
 
 
 
