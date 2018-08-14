@@ -12,8 +12,8 @@ module.exports.run = async (client, message, args) =>{
       .setTitle("🖼 Avatar de " + `${member.user.username}`)
       .setDescription(`Clique [aqui](${member.user.avatarURL}) para fazer o download da imagem.`)
       .setImage(member.user.avatarURL)
-      .setColor("#cc22a7")
-      .setFooter("Trix")
+      .setColor("#4a2aed")
+      .setFooter("Atlantic")
    
       message.channel.send(avatar)
    
@@ -23,8 +23,8 @@ module.exports.run = async (client, message, args) =>{
       .setTitle("🖼 Avatar de " + `${message.author.username}`)
       .setDescription(`Clique [aqui](${message.author.avatarURL}) para fazer o downlaod do seu avatar.`)
       .setImage(message.author.avatarURL)
-      .setColor("#cc22a7")
-      .setFooter("Trix")
+      .setColor("#4a2aed")
+      .setFooter("Atlantic")
    
       message.channel.send(avatar)
       
