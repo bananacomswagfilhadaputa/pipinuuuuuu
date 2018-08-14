@@ -20,4 +20,3 @@ exports.run = (client, message, args) => {
     }
 })
 
-v
