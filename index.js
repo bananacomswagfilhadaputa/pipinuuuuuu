@@ -38,7 +38,7 @@ client.on('guildMemberAdd', member => {
   let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(avatar)
-      .addField('Bem vindo ao discord.', `Bem vindo(a) ${member} ao discord oficial do Atlantic!\n \n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n`)
+      .addField('Bem vindo ao discord.', `Bem vindo(a) ${member} ao discord oficial do Atlantic!\n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n Para interagir com os player vá em: 💭chat`)
       .setFooter(`Atlantic`);
       client.channels.get('461946622675255296').send(embed);
       member.addRole(role)
