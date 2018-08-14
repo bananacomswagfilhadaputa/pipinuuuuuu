@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const fs = require('fs');
-
  
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -28,30 +27,23 @@ client.on("message", message => {
   } catch (err) {
     console.error(err);
   }
-
-  client.on("ready", () => {
-    console.log("Ativado.");
-     let gameloop = require('./comando_dono/loop.js'); // Ativaidae de status!!!!!!!!!!
-      gameloop.run(client);
-  })
  
 });
-
 
 client.on('guildMemberAdd', member => {
   let avatar = member.user.avatarURL
 
-  let role = member.guild.roles.find('name', 'Membro');
+  let role = member.guild.roles.find('name', 'Membros');
 
   let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(avatar)
-      .addField('Bem vindo jogador.', `Seja bem vindo ``${member}`` ao Discord do Atlantic!\n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n`)
-      .setFooter(`Pao - Suporte`);
+      .addField('Bem vindo ao discord.', `Bem vindo(a) ${member} ao discord oficial do Atlantic!\n \n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n`)
+      .setFooter(`Atlantic`);
       client.channels.get('461946622675255296').send(embed);
       member.addRole(role)
-
 })
+
 
 
 
