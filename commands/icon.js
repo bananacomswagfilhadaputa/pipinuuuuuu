@@ -3,17 +3,16 @@ const Discord = require('discord.js');
 exports.run = async (client, message, args, prefix) => {
     
     const comousar = new Discord.RichEmbed()
-        .setAuthor("Kally", client.user.avatarURL)
-        .setTitle(`${prefix}cargoid`)
-        .setDescription(`Irá adicionar o cargo ao usuário mencionado.`)
+        .setAuthor("Atlantic", client.user.avatarURL)
+        .setTitle(`!cargoid`)
+        .setDescription(`Dê um cargo ao membro mencionado.`)
         .setColor("#22a7cc")
-        .setFooter("© Kally - kally.glitch.me")
-        .addField("Como usar:", `\`${prefix}cargoid <nome do cargo>\`\n\`${prefix}setcargo ⚒ Desenvolvedor\``)
+        .setFooter("Atlantic")
 
     let rolename = args.join(' ');
     if(!rolename) return message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
 
-    if(!message.guild.roles.find("name", rolename)) return message.channel.send(`:face_palm: **|** ${message.author} o cargo **${rolename}** não existe (**OBS:** Coloque só o nome do cargo, emojis, minúsculo e maiúsculo nos lugares certos.)`)
+    if(!message.guild.roles.find("name", rolename)) return message.channel.send(`Cargo adicionado com sucesso.`)
 
     let role = message.guild.roles.find("name", rolename);
 
