@@ -1,53 +1,36 @@
-exports.run = async (bot, msg, args) => {
-    if (args.length < 1) {
-        throw 'Please provide an emoji to gather info on!';
-    }
+const ms = require('ms');
+exports.run = (client, message, args) => {
+  if (!client.lockit) client.lockit = [];
+  const time = args.join(' ');
+  const validUnlocks = ['destravar', 'off'];
+  if (!time) return message.reply('você deve definir uma duração para o bloqueio em horas, minutos ou segundos | Ex: !lockdown 10m');
 
-    if (args[0].charCodeAt(0) >= 55296) {
-        msg.delete();
+  if (validUnlocks.includes(time)) {
+    message.channel.overwritePermissions(message.guild.id, {
+      SEND_MESSAGES: null
+    }).then(() => {
+      message.channel.send('Lockdown desligado.');
+      clearTimeout(client.lockit[message.channel.id]);
+      delete client.lockit[message.channel.id];
+    }).catch(error => {
+      console.log(error);
+    });
+  } else {
+    message.channel.overwritePermissions(message.guild.id, {
+      SEND_MESSAGES: false
+    }).then(() => {
+      message.channel.send(`O canal __${message.channel.name}__ foi mutado por ${ms(ms(time), { long:true })}`).then(() => {
 
-        return (await msg.channel.send({
-            embed: bot.utils.embed(args[0], 'Built-in **Discord** emoji.')
-        })).delete(15000);
-    }
+        client.lockit[message.channel.id] = setTimeout(() => {
+          message.channel.overwritePermissions(message.guild.id, {
+            SEND_MESSAGES: null
+          }).then(message.channel.send('Lockdown desligado.')).catch(console.error);
+          delete client.lockit[message.channel.id];
+        }, ms(time));
 
-    const match = args[0].match(/<:[a-zA-Z0-9_-]+:(\d{18})>/);
-
-    if (!match || !match[1]) {
-        throw 'Please provide a valid emoji!';
-    }
-
-    const emoji = bot.emojis.get(match[1]);
-
-    if (!emoji) {
-        throw 'That emoji could not be identified.';
-    }
-
-    msg.delete();
-    (await msg.channel.send({
-        embed: bot.utils.embed('', '', [
-            {
-                name: 'Name',
-                value: emoji.name
-            },
-            {
-                name: 'From Guild',
-                value: emoji.guild.name
-            },
-            {
-                name: 'ID',
-                value: emoji.id
-            },
-            {
-                name: 'Download URL',
-                value: emoji.url
-            }
-        ], { thumbnail: emoji.url })
-    })).delete(15000);
-};
-
-exports.info = {
-    name: 'emoji',
-    usage: 'emoji <emoji>',
-    description: 'Shows information about an emoji'
+      }).catch(error => {
+        console.log(error);
+      });
+    });
+  }
 };
