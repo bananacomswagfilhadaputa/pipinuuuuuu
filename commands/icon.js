@@ -1,18 +1,33 @@
-module.exports.run = async (bot, message, args) => {
-	let msg = await message.channel.send("Pegando icon...");
+const Discord = require('discord.js');
 
-	if(!message.guild.iconURL) return msg.edit("Esse servidor não possui icon.");
+exports.run = async (client, message, args, prefix) => {
+    
+    const comousar = new Discord.RichEmbed()
+        .setAuthor("Kally", client.user.avatarURL)
+        .setTitle(`${prefix}cargoid`)
+        .setDescription(`Irá adicionar o cargo ao usuário mencionado.`)
+        .setColor("#22a7cc")
+        .setFooter("© Kally - kally.glitch.me")
+        .addField("Como usar:", `\`${prefix}cargoid <nome do cargo>\`\n\`${prefix}setcargo ⚒ Desenvolvedor\``)
 
-	await message.channel.send({files: [
-		{
-			attachment: message.guild.iconURL,
-			name: "icon.png"
-		}
-	]});
+    let rolename = args.join(' ');
+    if(!rolename) return message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
 
-	msg.delete();
+    if(!message.guild.roles.find("name", rolename)) return message.channel.send(`:face_palm: **|** ${message.author} o cargo **${rolename}** não existe (**OBS:** Coloque só o nome do cargo, emojis, minúsculo e maiúsculo nos lugares certos.)`)
+
+    let role = message.guild.roles.find("name", rolename);
+
+    const embedid = new Discord.RichEmbed()
+        .setDescription(`Cargo: ${role} - ID: ${role.id}\nCor (HEX): ${role.hexColor}`)
+        .setColor(role.color)
+
+    message.channel.send(message.author, embedid)
+
 }
 
-module.exports.help = {
-	name: "icon"
+exports.help = {
+    name: "roleid",
+    aliases: [
+        'cargoid'
+    ]
 }
