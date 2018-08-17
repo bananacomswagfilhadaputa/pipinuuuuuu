@@ -1,51 +1,33 @@
-const ping = require('mc-hermes');
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
-exports.run = (client, msg, args) => {
-    const emb = new Discord.RichEmbed();
-    const query = args.join(" ");
-    if(query.startsWith("server")) {
-        ip = query.replace('server', '').trim();
-        if(!ip) {
-            msg.channel.startTyping();
-            emb.setColor('#F03A17');
-            emb.addField('Esse IP não é válido.', 'Aqui vai um IP de exemplo: `mc.motocrack.net`');
-            emb.setFooter(msg.author.tag, msg.author.avatarURL);
-            msg.channel.stopTyping();
-            msg.channel.send({embed:emb});
-        }
-        var url = 'https://mcapi.de/api/image/favicon/'+ip
-        ping.pc({ server: ip }).then(async function(data) {
-            await msg.channel.startTyping();
-            await emb.setColor('#44FC37');
-            await emb.setAuthor(':thinking:| Informações '+ip, url);
-            await emb.addField(':hammer_pick: | Versão', data.version.name);
-            await emb.addField(':video_game:| Players jogando', data.players.online+" no total de  "+data.players.max);
-            await emb.setThumbnail(url);
-            await emb.setFooter(msg.author.tag, msg.author.avatarURL);
-            await msg.channel.stopTyping();
-            await msg.channel.send({embed:emb});
-        }).catch(async function(err) {
-            await msg.channel.startTyping();
-            await emb.addField('Um erro aconteceu...', err);
-            await emb.setColor('#F03A17');
-            await emb.setFooter(msg.author.tag, msg.author.avatarURL);
-            await msg.channel.stopTyping();
-            await msg.channel.send({embed:emb});
-        });
-      
-    
-} else if(!args[0]) {
-    msg.channel.startTyping();
-    emb.setColor('#44FC37');
-    emb.setAuthor('Comandos de minecraft', 'https://media.discordapp.net/attachments/264445053596991498/366656518524895232/unknown.png', 'https://minecraft.net');
-    emb.setThumbnail('https://media.discordapp.net/attachments/264445053596991498/366656518524895232/unknown.png');
-    emb.addField('`t!minecraft server`', "Serve para buscar informações sobre servidores.\nUse: t!minecraft server <ip>");
-    emb.setFooter(msg.author.tag, msg.author.avatarURL);
-    msg.channel.stopTyping();
-    msg.channel.send({embed:emb});
-}
-
-
+module.exports.run = async (bot, message, args) => {
+  
+  let online = message.guild.members.filter(member => member.user.presence.status !== 'offline');
+  let day = message.guild.createdAt.getDate()
+  let month = 1 + message.guild.createdAt.getMonth()
+  let year = message.guild.createdAt.getFullYear()
+   let sicon = message.guild.iconURL;
+   let serverembed = new Discord.RichEmbed()
+   .setAuthor(message.guild.name, sicon)
+   .setFooter(`Servidor criado • ${day}.${month}.${year}`)
+   .setColor("#cc22a7")
+   .setTimestamp()
+   .setThumbnail(sicon)
+   .addField("ID:", message.guild.id, true)
+   .addField("Nome:", message.guild.name, true)
+   .addField("Dono:", message.guild.owner.user.tag, true)
+   .addField("Região:", message.guild.region, true)
+   .addField("Channels", message.guild.channels.size, true)
+   .addField("Membros:", message.guild.memberCount, true)
+   .addField("Bots:", message.guild.members.filter(m => m.user.bot).size, true)
+   .addField(":white_circle: Onlines:", online.size, true)
+   .addField("Cargos:", message.guild.roles.size, true);
+   message.channel.send(serverembed);
 
 }
+exports.help = {
+  name: "serverinfo",
+  aliases: [
+      'sv'
+  ]
+  }
