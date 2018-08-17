@@ -1,36 +1,51 @@
-const ms = require('ms');
-exports.run = (client, message, args) => {
-  if (!client.lockit) client.lockit = [];
-  const time = args.join(' ');
-  const validUnlocks = ['destravar', 'off'];
-  if (!time) return message.reply('você deve definir uma duração para o bloqueio em horas, minutos ou segundos | Ex: !lockdown 10m');
+const ping = require('mc-hermes');
+const Discord = require('discord.js');
 
-  if (validUnlocks.includes(time)) {
-    message.channel.overwritePermissions(message.guild.id, {
-      SEND_MESSAGES: null
-    }).then(() => {
-      message.channel.send('Lockdown desligado.');
-      clearTimeout(client.lockit[message.channel.id]);
-      delete client.lockit[message.channel.id];
-    }).catch(error => {
-      console.log(error);
-    });
-  } else {
-    message.channel.overwritePermissions(message.guild.id, {
-      SEND_MESSAGES: false
-    }).then(() => {
-      message.channel.send(`O canal __${message.channel.name}__ foi mutado por ${ms(ms(time), { long:true })}`).then(() => {
+exports.run = (client, msg, args) => {
+    const emb = new Discord.RichEmbed();
+    const query = args.join(" ");
+    if(query.startsWith("server")) {
+        ip = query.replace('server', '').trim();
+        if(!ip) {
+            msg.channel.startTyping();
+            emb.setColor('#F03A17');
+            emb.addField('Esse IP não é válido.', 'Aqui vai um IP de exemplo: `mc.motocrack.net`');
+            emb.setFooter(msg.author.tag, msg.author.avatarURL);
+            msg.channel.stopTyping();
+            msg.channel.send({embed:emb});
+        }
+        var url = 'https://mcapi.de/api/image/favicon/'+ip
+        ping.pc({ server: ip }).then(async function(data) {
+            await msg.channel.startTyping();
+            await emb.setColor('#44FC37');
+            await emb.setAuthor(':thinking:| Informações '+ip, url);
+            await emb.addField(':hammer_pick: | Versão', data.version.name);
+            await emb.addField(':video_game:| Players jogando', data.players.online+" no total de  "+data.players.max);
+            await emb.setThumbnail(url);
+            await emb.setFooter(msg.author.tag, msg.author.avatarURL);
+            await msg.channel.stopTyping();
+            await msg.channel.send({embed:emb});
+        }).catch(async function(err) {
+            await msg.channel.startTyping();
+            await emb.addField('Um erro aconteceu...', err);
+            await emb.setColor('#F03A17');
+            await emb.setFooter(msg.author.tag, msg.author.avatarURL);
+            await msg.channel.stopTyping();
+            await msg.channel.send({embed:emb});
+        });
+      
+    
+} else if(!args[0]) {
+    msg.channel.startTyping();
+    emb.setColor('#44FC37');
+    emb.setAuthor('Comandos de minecraft', 'https://media.discordapp.net/attachments/264445053596991498/366656518524895232/unknown.png', 'https://minecraft.net');
+    emb.setThumbnail('https://media.discordapp.net/attachments/264445053596991498/366656518524895232/unknown.png');
+    emb.addField('`t!minecraft server`', "Serve para buscar informações sobre servidores.\nUse: t!minecraft server <ip>");
+    emb.setFooter(msg.author.tag, msg.author.avatarURL);
+    msg.channel.stopTyping();
+    msg.channel.send({embed:emb});
+}
 
-        client.lockit[message.channel.id] = setTimeout(() => {
-          message.channel.overwritePermissions(message.guild.id, {
-            SEND_MESSAGES: null
-          }).then(message.channel.send('Lockdown desligado.')).catch(console.error);
-          delete client.lockit[message.channel.id];
-        }, ms(time));
 
-      }).catch(error => {
-        console.log(error);
-      });
-    });
-  }
-};
+
+}
