@@ -4,7 +4,7 @@ exports.run = async (client, message, args, prefix) => {
     
     const comousar = new Discord.RichEmbed()
         .setAuthor("Atlantic", client.user.avatarURL)
-        .setTitle(`!cargoid`)
+        .setTitle(`!cargoadd`)
         .setDescription(`Dê um cargo ao membro mencionado.`)
         .setColor("#22a7cc")
         .setFooter("Atlantic")
