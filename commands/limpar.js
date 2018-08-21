@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) =>{
    const comousar = new Discord.RichEmbed()
    .setAuthor("Atlantic", client.user.avatarURL)
    .setDescription(`Ao executar, ira limpar a quantia de mensagens definida`)
-   .setColor("#cc22a7")
+   .setColor("#4a2aed")
    .setFooter("Atlantic")
    .addField("Como usar:", "`!limpar <quantidade>`")
 
