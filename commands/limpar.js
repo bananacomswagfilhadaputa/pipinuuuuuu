@@ -7,11 +7,11 @@ module.exports.run = async (client, message, args) =>{
    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("você não tem permissão! :x:");
    
    const comousar = new Discord.RichEmbed()
-   .setAuthor("Trix", client.user.avatarURL)
+   .setAuthor("Atlantic", client.user.avatarURL)
    .setDescription(`Ao executar, ira limpar a quantia de mensagens definida`)
    .setColor("#cc22a7")
-   .setFooter("© Trix - Paosz#5829")
-   .addField("Como usar:", "`t!limpar <quantidade>`")
+   .setFooter("Atlantic")
+   .addField("Como usar:", "`!limpar <quantidade>`")
 
    const num = args.join(" ");
 
