@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args) =>{
     const mutarcanalmsg = new Discord.RichEmbed()
         .setTitle("Gerenciamento do chat.")
         .setDescription(`Deseja mutar este canal? reaja ao emoji :mute:\nDeseja desmutar este canal? reaja ao emoji :loud_sound:\nEstá com duvidas reaja ao emoji :question:`)
-        .setColor("#cc22a7")
+        .setColor("#4a2aed")
         .setFooter(`Atlantic - Ira mutar o canal: ${message.channel.name}`)
     let mensg = args.join(" ");
     if(!mensg){
