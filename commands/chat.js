@@ -44,9 +44,9 @@ module.exports.run = async (client, message, args) =>{
                     const comousar = new Discord.RichEmbed()
                         .setAuthor("Kally", client.user.avatarURL)
                         .setDescription(`Ao executar, ira mutar ou desmutar o devido canal.`)
-                        .setColor("#cc22a7")
-                        .setFooter("Atlantic  - Paosz#5829")
-                        .addField("Como usar:", "`t!chat <on/off>`")
+                        .setColor("#4a2aed")
+                        .setFooter("Atlantic")
+                        .addField("Como usar:", "`!chat <on/off>`")
                     message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
                 })
             })
@@ -64,7 +64,7 @@ module.exports.run = async (client, message, args) =>{
             message.channel.send(`Este canal foi desmutado por: __${message.author}__`)
             return;
         } else{
-        message.reply("por favor use assim: `t!chat off` ou `t!chat on`!").then(msg => msg.delete(8000));
+        message.reply("por favor use assim: `!chat off` ou `!chat on`!").then(msg => msg.delete(8000));
         }
     }
     
