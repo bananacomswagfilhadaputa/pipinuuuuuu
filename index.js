@@ -88,9 +88,9 @@ client.on("message", message => {
   client.on("message", message => {
       if (message.content.startsWith("!adicionar")) {
           let member = message.mentions.members.first();
-          if (message.mentions.users.size < 1) return message.channel.send("você deve mencionar alguém!");
-          message.author.send("O ``" + member.displayName + "`` foi adicionado em sua sala!");
-          message.channel.send(member + " Voce foi adicionado da sala do ``" + message.author + "`` basta você entrar!")
+          if (message.mentions.users.size < 1) return message.channel.send("você deve mencionar alguém!").then(msg => msg.delete(8000));
+          message.author.send("O ``" + member.displayName + "`` foi adicionado em sua sala!").then(msg => msg.delete(8000));
+          message.channel.send(member + " Voce foi adicionado da sala do ``" + message.author + "`` basta você entrar!").then(msg => msg.delete(8000));
           var cargo = message.guild.roles.find('name',message.author.username)
           if (cargo == null) return;
 
