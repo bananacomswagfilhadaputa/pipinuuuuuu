@@ -53,7 +53,7 @@ client.on('message', message => {
 client.on("message", message => {
 
   if(message.content.startsWith("!criar")) {
-      message.author.send("Sua sala foi criada, use !adicionar <nick> para adicionar alguém nela")
+      message.author.send("Sua sala foi criada, use !adicionar <nick> para adicionar alguém nela").then(msg => msg.delete(8000));
       message.channel.send(message.author + ", sua sala foi criada, você tem 15 segundos para entrar nela, se não ela sera removida.").then(msg => msg.delete(8000));
       message.delete();
 
