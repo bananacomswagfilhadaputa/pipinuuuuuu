@@ -53,8 +53,8 @@ client.on('message', message => {
 client.on("message", message => {
 
   if(message.content.startsWith("!criar")) {
-      message.author.send("Sala criada")
-      message.channel.send(message.author + " Sua sala foi criada, você tem 15 segundos para entrar nela, se não ela sera removida.")
+      message.author.send("Sua sala foi criada, use !adicionar <nick> para adicionar alguém nela")
+      message.channel.send(message.author + ", sua sala foi criada, você tem 15 segundos para entrar nela, se não ela sera removida.").then(msg => msg.delete(8000));
       message.delete();
 
       message.guild.createRole({"name":message.author.username}).then(a =>{
@@ -63,7 +63,7 @@ client.on("message", message => {
           var da = message.guild.roles.find("name","@everyone")
           b.overwritePermissions(da,{
           CONNECT: false,
-          VIEW_CHANNEL: false
+          VIEW_CHANNEL: true
           
           })
           b.overwritePermissions(a,{
@@ -88,9 +88,9 @@ client.on("message", message => {
   client.on("message", message => {
       if (message.content.startsWith("!adicionar")) {
           let member = message.mentions.members.first();
-          if (message.mentions.users.size < 1) return message.channel.send("Mencione alguem");
-          message.author.send("O " + member.displayName + " foi adicionado na sala!");
-          message.channel.send(member + " Voce foi adicionado da sala do " + message.author + " basta você entrar!")
+          if (message.mentions.users.size < 1) return message.channel.send("você deve mencionar alguém!");
+          message.author.send("O ``" + member.displayName + "`` foi adicionado em sua sala!");
+          message.channel.send(member + " Voce foi adicionado da sala do ``" + message.author + "`` basta você entrar!")
           var cargo = message.guild.roles.find('name',message.author.username)
           if (cargo == null) return;
 
@@ -113,6 +113,7 @@ client.on('message', message =>{
     message.channel.send(`${message.author}, não divulgue links de outros servidores!`)
   }
 })
+
 
 
 
