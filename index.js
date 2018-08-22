@@ -33,7 +33,7 @@ client.on("message", message => {
 client.on('guildMemberAdd', member => {
   let avatar = member.user.avatarURL
 
-  let role = member.guild.roles.find('name', 'Membros');
+  let role = member.guild.roles.find('name', 'Membro');
 
   let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
@@ -44,6 +44,75 @@ client.on('guildMemberAdd', member => {
       member.addRole(role)
 })
 
+client.on('message', message => {
+  if(message.content.toLowerCase() === '!criador')
+  message.channel.send('Meu criador é o <@407365291870257153>');
+
+});
+
+client.on("message", message => {
+
+  if(message.content.startsWith("!criar")) {
+      message.author.send("Sala criada")
+      message.channel.send(message.author + " Sua sala foi criada, você tem 15 segundos para entrar nela, se não ela sera removida.")
+      message.delete();
+
+      message.guild.createRole({"name":message.author.username}).then(a =>{
+          message.guild.members.get(message.author.id).addRole(a)
+          message.guild.createChannel(message.author.username,'voice').then(b =>{
+          var da = message.guild.roles.find("name","@everyone")
+          b.overwritePermissions(da,{
+          CONNECT: false,
+          VIEW_CHANNEL: false
+          
+          })
+          b.overwritePermissions(a,{
+              VIEW_CHANNEL: true,
+              CONNECT:true
+          })
+          message.member.setVoiceChannel(b)
+      var o = setInterval(() =>{
+      if (b.members.size == 0){
+      b.delete()
+      a.delete()
+      clearInterval(o)
+}
+
+},1000 * 30)
+
+          })
+          
+      
+  })
+
+  client.on("message", message => {
+      if (message.content.startsWith("!adicionar")) {
+          let member = message.mentions.members.first();
+          if (message.mentions.users.size < 1) return message.channel.send("Mencione alguem");
+          message.author.send("O " + member.displayName + " foi adicionado na sala!");
+          message.channel.send(member + " Voce foi adicionado da sala do " + message.author + " basta você entrar!")
+          var cargo = message.guild.roles.find('name',message.author.username)
+          if (cargo == null) return;
+
+          message.guild.members.get(message.mentions.users.first().id).addRole(cargo)
+      
+  }
+})
+  }
+})
+
+client.on('message', message =>{
+  if(message.content.includes("https://discord.gg/")){
+      message.delete()
+    message.channel.send(`${message.author}, não divulgue links de outros servidores!`)
+  }
+})
+client.on('message', message =>{
+  if(message.content.includes("https://discord.me/")){
+      message.delete()
+    message.channel.send(`${message.author}, não divulgue links de outros servidores!`)
+  }
+})
 
 
 
