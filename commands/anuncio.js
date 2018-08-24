@@ -1,55 +1,45 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const bot = new Discord.Client({disableEveryone: false});
 
-module.exports.run = async (client, message, args) =>{
+module.exports.run = (bot, message, args) => {
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(message.author.toString() + "desculpe, apenas administradores podem usar esse comando");
+    const msg = args.join(" ");
+    message.delete().catch();
 
-   message.delete().catch(O_o=>{});
-   if (!message.member.hasPermission('MANAGE_GUILD'))
-      return message.reply("você não tem permissão!").then(msg => msg.delete(10000));
-   let kallyrole = message.guild.roles.find("name", "Kally");
-   const comousar = new Discord.RichEmbed()
-      .setAuthor("Atlantic", client.user.avatarURL)
-      .setColor("#4a2aed")
-      .setFooter("© Atlantic")
-      .addField("Como usar:", "`!anuncio <mensagem>`")
-      
-   let mensg = args.join(" ");
-   if(!mensg)
-      return message.channel.send(message.author, comousar).then(msg => msg.delete(10000));
-   if(!message.guild.roles.find("name", "Kally")) {
-        const anuncio = new Discord.RichEmbed()
-            .setColor('#4a2aed')
-            .setTitle(`⚠️ Atlantic - Anúncio`)
-            
-            .setDescription(mensg)
-            
-            .setTimestamp()
-            .setFooter(`Por: ${message.author.tag} - Atlantic`, message.author.avatarURL)
-
-        message.channel.send("@everyone", anuncio)
-        return;
+  bot.channels.get('478995804711813150').send({
+    "embed": {
+        "author": { 
+            "name": "Atlantic - Logs",
+            "icon_url": "https://cdn.discordapp.com/attachments/444946317018529804/466307134393548810/Chest.gif"
+        },
+        "description": `<@${message.author.id}> enviou um aviso no canal: <#${message.channel.id}> contendo a mensagem: \`\`\`${msg}\`\`\``,
+        "color": 3553598,  
+        "timestamp": new Date(),
+        "footer": {
+            "icon_url": 'https://cdn.discordapp.com/attachments/444946317018529804/466307134393548810/Chest.gif',
+            "text": "Atlantic - Logs"
+        },
     }
-    if(kallyrole.color == "0"){
-            const anuncio = new Discord.RichEmbed()
-                .setColor('#4a2aed')
-                .setTitle(`⚠️ Atlantic - Anúncio`)
-                
-                .setDescription(mensg)
-                
-                .setTimestamp()
-                .setFooter(`Por: ${message.author.tag} - Atlantic `, message.author.avatarURL)
+  })
+  message.channel.send("@everyone")
+  message.channel.send({
+    "embed": {
+        "author": { 
+            "name": "Atlantic - Anúncios",
+            "icon_url": "https://images-ext-1.discordapp.net/external/b_2_TI_xAnWjCi-Z4xFJLPl3zL0RZDGqgPaE8Xi3Uz0/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/478035553934245892/77286441cbc00ae41650e225777ba98c.png?width=559&height=559",
+            "url": "https://discord.gg/H5zPMJ"
+        },
+        "description": msg,
+        "color": 3553598,  
+        "timestamp": new Date(),
+        "footer": {
+            "icon_url": 'https://images-ext-1.discordapp.net/external/b_2_TI_xAnWjCi-Z4xFJLPl3zL0RZDGqgPaE8Xi3Uz0/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/478035553934245892/77286441cbc00ae41650e225777ba98c.png?width=559&height=559',
+            "text": "Atlantic - Anúncios"
+        },
+    }
+})
+}
 
-            message.channel.send("@everyone", anuncio)
-        }else{
-            const anuncio = new Discord.RichEmbed()
-                .setColor(kallyrole.color)
-                .setTitle(`⚠️ Atlantic - Anúncio`)
-                
-                .setDescription(mensg)
-                
-                .setTimestamp()
-                .setFooter(`Por: ${message.author.tag} - Atlantic`, message.author.avatarURL)
-
-            message.channel.send("@everyone", anuncio)
-            return;
-        }   
+module.exports.help = {
+    name: "aviso"
 }
