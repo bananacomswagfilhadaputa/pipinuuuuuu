@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) =>{
 
     if(message.channel.id != "461944635808284683") return message.reply(`você não pode executar comandos aqui, vá em <#461944635808284683>`).then(msg => msg.delete(5000))
    message.delete().catch(O_o=>{})
-    const ip = new Discord.RichEmbed()
+    const form = new Discord.RichEmbed()
        .setColor("4a2aed")
        .setAuthor("Atlantic")
        
@@ -14,6 +14,6 @@ module.exports.run = async (client, message, args) =>{
        .setTimestamp()
        .setFooter(`Atlantic - Formulários`)
     
-    message.channel.send(message.author , ip)
+    message.channel.send(message.author , form).then(msg => msg.delete(3000));
 
 }
