@@ -6,7 +6,7 @@ module.exports.run = (bot, message, args) => {
     const msg = args.join(" ");
     message.delete().catch();
 
-  bot.channels.get('478995804711813150').send({
+  bot.channels.get('482685417934815244').send({
     "embed": {
         "author": { 
             "name": "Atlantic - Logs",
