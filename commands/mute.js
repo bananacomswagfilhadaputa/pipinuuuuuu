@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) =>{
     const comousar = new Discord.RichEmbed()
     .setAuthor("Atlantic", client.user.avatarURL)
     .setDescription(`Ao executar, ira mutar o membro mencionado.`)
-    .setColor4a2aed
+    .setColor("4a2aed")
     .setFooter("© Atlantic- Paosz#5829")
     .addField("Como usar:", "`!mute @usuário <motivo>`")
     let member = message.mentions.members.first();
