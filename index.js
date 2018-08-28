@@ -8,6 +8,8 @@ const client = new Discord.Client();
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 
+const youtube = new YouTube(process.env.GOOGLE_API_KEY);
+
 var hoje = new Date();
             var dd = hoje.getDate();
             var mm = hoje.getMonth()+1;
