@@ -40,7 +40,7 @@ module.exports.run = async (client, message, args) =>{
         .addField("👮| Autor:", message.author)
         .addField("📋| Motivo:", motivo)
         .setTimestamp()
-        .setFooter("Toxic - Moderação")
+        .setFooter("Atlantic - Moderação")
 
     if(message.guild.channels.find("name", "punidos")){
         let guild = message.guild.channels.find("name", "punidos");   
